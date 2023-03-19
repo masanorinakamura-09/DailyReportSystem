@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TopPage of DailyReportSystem</title>
+    <link rel="stylesheet" th:href="@{/css/DailyReportSystem/toppage.css}">
+</head>
+<body>
+    <h2>日報管理システム</h2>
+    <h1>従業員　一覧</h1>
+    <table>
+        <tr>
+            <th>社員番号</th>
+            <th>氏名</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="employee : ${employeelist}">
+            <td th:text="${employee.authentication.code}">
+            <td th:text="${employee.name}">
+        </tr>
+    </table>
+
+</body>
+</html>

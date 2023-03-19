@@ -11,17 +11,19 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Where;
+
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 @Entity
 @Table(name="employee")
+@Where(clause = "delete_flag = 0")
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     private Authentication authentication;
@@ -30,7 +32,7 @@ public class Employee {
     private String name;
 
     @Column(nullable=false)
-    private int deleteFlag;
+    private Integer deleteFlag;
 
     @Column(nullable=false)
     private LocalDateTime createdAt;
