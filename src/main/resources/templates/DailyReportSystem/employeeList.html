@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>TopPage of DailyReportSystem</title>
+    <title>日報管理システム</title>
     <link rel="stylesheet" th:href="@{/css/DailyReportSystem/toppage.css}">
 </head>
 <body>
@@ -15,10 +15,12 @@
             <th>操作</th>
         </tr>
         <tr th:each="employee : ${employeelist}">
-            <td th:text="${employee.authentication.code}">
-            <td th:text="${employee.name}">
+            <td th:text="${employee.authentication.code}"></td>
+            <td th:text="${employee.name}"></td>
+            <td> <a th:href="@{/employee/employeeDetail/{id}/(id=${employee.id})}"　th:text="詳細を見る"></a></td>
         </tr>
     </table>
-
+    <p　th:text="'（全'+${index}+'件）'"></p>
+    <a th:href="@{/employee/employeeregister}"　th:text="新規従業員の登録"></a>
 </body>
 </html>

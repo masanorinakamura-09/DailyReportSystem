@@ -10,17 +10,17 @@ import com.techacademy.service.EmployeeService;
 @Controller
 @RequestMapping("DailyReportSystem")
 public class DailyReportSystemController {
-    private final EmployeeService service;
+    /*private final EmployeeService service;
 
     public DailyReportSystemController(EmployeeService service) {
         this.service = service;
     }
 
-    @GetMapping("/toppage")
+    @GetMapping("/EmployeeList")
     public String getTopPage(Model model) {
 
         model.addAttribute("employeelist",service.getEmployeeList());
-        return "DailyReportSystem/toppage";
-    }
+        return "DailyReportSystem/employeeList";
+    }*/
 
 }

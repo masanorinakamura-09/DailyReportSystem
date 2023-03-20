@@ -18,6 +18,10 @@ public class EmployeeService {
     public List<Employee> getEmployeeList(){
         return repository.findAll();
     }
+    
+    public long getIndex() {
+        return repository.count();
+    }
 
 
 }
