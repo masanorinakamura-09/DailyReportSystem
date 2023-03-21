@@ -3,6 +3,7 @@ package com.techacademy.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.techacademy.service.EmployeeService;
@@ -25,7 +26,9 @@ public class EmployeeController {
         return "DailyReportSystem/employeeList";
     }
     @GetMapping("/employeeDetail/{id}")
-    public String getEmployeeDetail() {
+    public String getEmployeeDetail(@PathVariable("id") Integer id,Model model) {
+
+        model.addAttribute("employeedetail",service.getEmployeeDetail(id));
         return "DailyReportSystem/employeeDetail";
     }
 

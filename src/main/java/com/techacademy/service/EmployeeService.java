@@ -18,9 +18,15 @@ public class EmployeeService {
     public List<Employee> getEmployeeList(){
         return repository.findAll();
     }
-    
+
     public long getIndex() {
         return repository.count();
+    }
+
+    public Employee getEmployeeDetail(Integer id) {
+
+        return repository.findById(id).get();
+
     }
 
 
