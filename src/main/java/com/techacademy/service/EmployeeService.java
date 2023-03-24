@@ -36,6 +36,12 @@ public class EmployeeService {
         return repository.save(employee);
     }
 
+    @Transactional
+    public void deleteEmployee(Integer id) {
+        repository.deleteById(id);
+    }
+
+
 
 
 

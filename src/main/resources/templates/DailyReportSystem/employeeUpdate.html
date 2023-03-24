@@ -5,18 +5,19 @@
     <title>日報管理システム</title>
 </head>
 <body>
-    <h1>従業員　新規登録ページ</h1>
+    <h1 th:text="'ID:'+${id}+'の従業員情報　編集ページ'"></h1>
 
 
-        <form method="post" th:action="@{/employee/employeeregister}"  th:object="${employee}">
+        <form method="post" th:action="@{/employee/employeeUpdate/{id}/(id=${employeeupdate.id})}" th:object="${employeeupdate}">
             <label for="code">社員番号</label>
             <input type="text" th:field="*{authentication.code}">
             <br>
             <label for="name">氏名</label>
-            <input type="text" th:field="*{name}">
+            <input type="text" th:field="*{name}" >
             <br>
-            <label for="password">パスワード</label>
-            <input type="text" th:field="*{authentication.password}">
+            <label for="newpassword">パスワード</label>
+            <input type="text" name="newpassword" >
+            <input type="hidden"  name="oldpassword" th:value="*{authentication.password}" >
             <br>
             <label for="role">権限</label>
             <select th:field="*{authentication.role}">
@@ -26,6 +27,8 @@
             </select>
             <br>
             <input type="submit" value="投稿">
+            <br>
+            <a th:href="@{/employee/employeeDelete/{id}/(id=${employeeupdate.id})}" th:text="この従業員を削除"></a>
             <br>
             <a th:href="@{/employee/employeelist}" th:text="一覧に戻る"></a>
     </form>

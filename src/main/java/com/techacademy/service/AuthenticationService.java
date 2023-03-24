@@ -1,5 +1,6 @@
 package com.techacademy.service;
 
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -16,8 +17,10 @@ public class AuthenticationService {
     }
 
     @Transactional
-    public Authentication saveEmployee(Authentication authentication) {
-        return repository.save(authentication);
+    public void deleteAuthentication(String code) {
+        repository.deleteById(code);
     }
+
+
 
 }
