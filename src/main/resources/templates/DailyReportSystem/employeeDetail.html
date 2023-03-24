@@ -6,34 +6,35 @@
     <link rel="stylesheet" th:href="@{/css/DailyReportSystem/employeedetail.css}">
 </head>
 <body>
-    <h1 th:text="従業員情報詳細ページ"></h1>
+    <h1>従業員　情報詳細ページ</h1>
     <table>
         <tr>
             <th>社員番号</th>
-            <th th:text="${employeedetail.authentication.code}"></th>
+            <td th:text="${employeedetail.authentication.code}"></td>
         </tr>
 
         <tr>
             <th>氏名</th>
-            <th th:text="${employeedetail.name}"></th>
+            <td th:text="${employeedetail.name}"></td>
         </tr>
 
         <tr>
             <th>権限</th>
-            <th th:text="${employeedetail.authentication.role}"></th>
+            <td th:text="${employeedetail.authentication.role}"></td>
         </tr>
 
         <tr>
             <th>登録日時</th>
-            <th th:text="${#temporals.format(employeedetail.createdAt,'yyyy/MM/dd HH:mm:ss')}"></th>
+            <td th:text="${#temporals.format(employeedetail.createdAt,'yyyy/MM/dd HH:mm:ss')}"></td>
         </tr>
 
         <tr>
             <th>更新日時</th>
-            <th th:text="${#temporals.format(employeedetail.updateAt,'yyyy/MM/dd HH:mm:ss')}"></th>
+            <td th:text="${#temporals.format(employeedetail.updateAt,'yyyy/MM/dd HH:mm:ss')}"></td>
         </tr>
     </table>
-    <p th:text="この従業員を編集する"></p>
+    <a th:href="@{/employee/employeeUpdate/{id}/(id=${employeedetail.id})}" th:text="この従業員を編集する"></a>
+    <br>
     <a th:href="@{/employee/employeelist}" th:text="一覧に戻る"></a>
 </body>
 </html>

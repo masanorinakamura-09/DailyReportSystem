@@ -25,7 +25,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy="employee", cascade = CascadeType.ALL)
     private Authentication authentication;
 
     @Column(length=20,nullable=false)
@@ -34,10 +34,10 @@ public class Employee {
     @Column(nullable=false)
     private Integer deleteFlag;
 
-    @Column(nullable=false)
+    @Column(nullable=false,updatable=false,columnDefinition="TIMESTAMP")
     private LocalDateTime createdAt;
 
-    @Column(nullable=false)
+    @Column(nullable=false,columnDefinition="TIMESTAMP")
     private LocalDateTime updateAt;
 
 

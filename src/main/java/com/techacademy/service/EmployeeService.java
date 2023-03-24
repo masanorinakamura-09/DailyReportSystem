@@ -2,6 +2,8 @@ package com.techacademy.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.techacademy.entity.Employee;
@@ -28,6 +30,13 @@ public class EmployeeService {
         return repository.findById(id).get();
 
     }
+
+    @Transactional
+    public Employee saveEmployee(Employee employee) {
+        return repository.save(employee);
+    }
+
+
 
 
 }
