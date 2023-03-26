@@ -31,18 +31,18 @@ public class EmployeeController {
 
         return "DailyReportSystem/employeeList";
     }
-    @GetMapping("/employeeDetail/{id}")
+    @GetMapping("/employeedetail/{id}")
     public String getEmployeeDetail(@PathVariable("id") Integer id,Model model) {
 
         model.addAttribute("employeedetail",service.getEmployeeDetail(id));
-        return "DailyReportSystem/employeeDetail";
+        return "DailyReportSystem/employeedetail";
     }
 
 
     @GetMapping("/employeeregister")
     public String getEmployeeRegister(@ModelAttribute Employee employee){
 
-        return "DailyReportSystem/employeeRegister";
+        return "DailyReportSystem/employeeregister";
     }
 
     @PostMapping("/employeeregister")
@@ -62,14 +62,14 @@ public class EmployeeController {
         return "redirect:/employee/employeeregister";
     }
 
-    @GetMapping("/employeeUpdate/{id}")
+    @GetMapping("/employeeupdate/{id}")
     public String getEmployeeUpdate(@PathVariable("id") Integer id,Model model) {
 
     model.addAttribute("employeeupdate",service.getEmployeeDetail(id));
-    return "DailyReportSystem/employeeUpdate";
+    return "DailyReportSystem/employeeupdate";
     }
 
-    @PostMapping("/employeeUpdate/{id}")
+    @PostMapping("/employeeupdate/{id}")
     public String postEmployeeUpdate(@RequestParam(name="newpassword") String newpassword,
                                          @RequestParam(name="oldpassword") String oldpassword,Employee employee){
          LocalDateTime now=LocalDateTime.now();
@@ -85,10 +85,10 @@ public class EmployeeController {
         employee.getAuthentication().setEmployee(employee);
         service.saveEmployee(employee);
 
-        return "redirect:/employee/employeeUpdate/{id}/";
+        return "redirect:/employee/employeeupdate/{id}/";
     }
 
-    @GetMapping("/employeeDelete/{id}")
+    @GetMapping("/employeedelete/{id}")
     public String getEmployeeDelete(@PathVariable("id") Integer id) {
         Employee employee=service.getEmployeeDetail(id);
         LocalDateTime now=LocalDateTime.now();

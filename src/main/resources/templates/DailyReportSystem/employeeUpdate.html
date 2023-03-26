@@ -3,32 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>日報管理システム</title>
+    <link rel="stylesheet" th:href="@{/css/DailyReportSystem/employee/employeeupdate.css}">
 </head>
+<header>
+    <nav class="global_navi">
+        <ul>
+        <li>日報管理システム</li>
+        <li>従業員管理</li>
+        <li>日報管理</li>
+        <li>氏名　さん</li>
+        <li>ログアウト</li>
+        </ul>
+    </nav>
+</header>
 <body>
     <h1 th:text="'ID:'+${id}+'の従業員情報　編集ページ'"></h1>
+    <p>(パスワードは変更する場合のみ入力してください)</p>
 
 
-        <form method="post" th:action="@{/employee/employeeUpdate/{id}/(id=${employeeupdate.id})}" th:object="${employeeupdate}">
-            <label for="code">社員番号</label>
+        <form method="post" th:action="@{/employee/employeeupdate/{id}/(id=${employeeupdate.id})}" th:object="${employeeupdate}" class="update_form">
+            <label for="code" class="form">社員番号</label>
             <input type="text" th:field="*{authentication.code}">
             <br>
-            <label for="name">氏名</label>
+            <label for="name" class="form">氏名</label>
             <input type="text" th:field="*{name}" >
             <br>
-            <label for="newpassword">パスワード</label>
+            <label for="newpassword" class="form">パスワード</label>
             <input type="text" name="newpassword" >
             <input type="hidden"  name="oldpassword" th:value="*{authentication.password}" >
             <br>
-            <label for="role">権限</label>
+            <label for="role" class="form">権限</label>
             <select th:field="*{authentication.role}">
-                <option value="" th:text="選択してください">
                 <option th:each="item:${T(com.techacademy.entity.Authentication.Role).values()}"
                                         th:value="${item}" th:text="${item}">
             </select>
             <br>
-            <input type="submit" value="投稿">
+            <input type="submit" value="投稿" class="form">
             <br>
-            <a th:href="@{/employee/employeeDelete/{id}/(id=${employeeupdate.id})}" th:text="この従業員を削除"></a>
+            <a th:href="@{/employee/employeedelete/{id}/(id=${employeeupdate.id})}" th:text="この従業員情報を削除する"></a>
             <br>
             <a th:href="@{/employee/employeelist}" th:text="一覧に戻る"></a>
     </form>

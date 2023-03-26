@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+header{
+     width: 600px;
+     height: 100px auto;
+
+}
+
+.global_navi ul{
+    list-style:none;
+    display: flex;
+    column-gap: 1px;
+    background-color:#4b4b4b;
+    margin: 0px;
+    padding:0px 5px 0px;
+    column-gap:15px;
+
+
+}
+
+.global_navi ul li{
+        text-align: center;
+        color:#ffffff;
+        margin:20px 0px 0px ;
+
+
+}
+
+.global_navi ul li:first-child{
+    font-size:25px;
+    margin:10px 0px 0px ;
+}
+
+.global_navi ul li:last-child{
+        margin:20px 0px 0px auto;
+}
+
+
