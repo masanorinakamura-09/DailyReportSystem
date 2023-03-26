@@ -4,3 +4,7 @@
 .form{
     display:block;
 }
+
+.err{
+    color: #ff0000
+}

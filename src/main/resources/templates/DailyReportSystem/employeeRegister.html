@@ -11,7 +11,7 @@
         <li>日報管理システム</li>
         <li>従業員管理</li>
         <li>日報管理</li>
-        <li>氏名　さん</li>
+        <li>氏名 さん</li>
         <li>ログアウト</li>
         </ul>
     </nav>
@@ -23,12 +23,15 @@
         <form method="post" th:action="@{/employee/employeeregister}"  th:object="${employee}" class="register_form">
             <label for="code" class="form">社員番号</label>
             <input type="text" th:field="*{authentication.code}">
+             <span th:errors="*{authentication.code}" class="err"></span>
             <br>
             <label for="name" class="form">氏名</label>
             <input type="text" th:field="*{name}">
+             <span th:errors="*{name}" class="err"></span>
             <br>
             <label for="password" class="form">パスワード</label>
             <input type="text" th:field="*{authentication.password}">
+            <span th:errors="*{authentication.password}" class="err"></span>
             <br>
             <label for="role" class="form">権限</label>
             <select th:field="*{authentication.role}">

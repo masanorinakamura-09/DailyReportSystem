@@ -11,26 +11,27 @@
         <li>日報管理システム</li>
         <li>従業員管理</li>
         <li>日報管理</li>
-        <li>氏名　さん</li>
+        <li>氏名 さん</li>
         <li>ログアウト</li>
         </ul>
     </nav>
 </header>
 <body>
-    <h1 th:text="'ID:'+${id}+'の従業員情報　編集ページ'"></h1>
+    <h1 th:text="'ID:'+${employee.id}+'の従業員情報　編集ページ'"></h1>
     <p>(パスワードは変更する場合のみ入力してください)</p>
 
 
-        <form method="post" th:action="@{/employee/employeeupdate/{id}/(id=${employeeupdate.id})}" th:object="${employeeupdate}" class="update_form">
+        <form method="post" th:action="@{/employee/employeeupdate/{id}/(id=${employee.id})}" th:object="${employee}" class="update_form">
             <label for="code" class="form">社員番号</label>
-            <input type="text" th:field="*{authentication.code}">
+            <input type="text" th:field="*{authentication.code}" readonly>
+            <span th:errors="*{authentication.code}" class="err"　></span>
             <br>
             <label for="name" class="form">氏名</label>
             <input type="text" th:field="*{name}" >
+            <span th:errors="*{name}" class="err"></span>
             <br>
-            <label for="newpassword" class="form">パスワード</label>
-            <input type="text" name="newpassword" >
-            <input type="hidden"  name="oldpassword" th:value="*{authentication.password}" >
+            <label for="password" class="form">パスワード</label>
+            <input type="text" name="password" >
             <br>
             <label for="role" class="form">権限</label>
             <select th:field="*{authentication.role}">
@@ -40,7 +41,7 @@
             <br>
             <input type="submit" value="投稿" class="form">
             <br>
-            <a th:href="@{/employee/employeedelete/{id}/(id=${employeeupdate.id})}" th:text="この従業員情報を削除する"></a>
+            <a th:href="@{/employee/employeedelete/{id}/(id=${employee.id})}" th:text="この従業員情報を削除する"></a>
             <br>
             <a th:href="@{/employee/employeelist}" th:text="一覧に戻る"></a>
     </form>

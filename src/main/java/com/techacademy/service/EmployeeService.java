@@ -31,15 +31,13 @@ public class EmployeeService {
 
     }
 
+
     @Transactional
     public Employee saveEmployee(Employee employee) {
         return repository.save(employee);
     }
 
-    @Transactional
-    public void deleteEmployee(Integer id) {
-        repository.deleteById(id);
-    }
+
 
 
 
