@@ -8,19 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.techacademy.service.EmployeeService;
 
 @Controller
-@RequestMapping("DailyReportSystem")
+@RequestMapping()
 public class DailyReportSystemController {
-    /*private final EmployeeService service;
-
-    public DailyReportSystemController(EmployeeService service) {
-        this.service = service;
-    }
-
-    @GetMapping("/EmployeeList")
-    public String getTopPage(Model model) {
-
-        model.addAttribute("employeelist",service.getEmployeeList());
-        return "DailyReportSystem/employeeList";
-    }*/
+    @GetMapping("/")
+        public String getTop(){
+            return "topPage";
+        }
 
 }

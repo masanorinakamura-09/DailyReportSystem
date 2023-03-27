@@ -15,15 +15,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techacademy.entity.Employee;
 import com.techacademy.entity.Authentication.Register;
+import com.techacademy.service.AuthenticationService;
 import com.techacademy.service.EmployeeService;
 
 @Controller
 @RequestMapping("employee")
 public class EmployeeController {
     private final EmployeeService service;
+    private final AuthenticationService authenticationservice;
 
-    public EmployeeController(EmployeeService service) {
+
+    public EmployeeController(EmployeeService service,AuthenticationService authenticationservice) {
         this.service = service;
+        this.authenticationservice=authenticationservice;
     }
 
     @GetMapping("/employeelist")
@@ -52,18 +56,26 @@ public class EmployeeController {
     public String postEmployeeRegister(@Validated({Register.class}) Employee employee,BindingResult res){
         LocalDateTime now=LocalDateTime.now();
 
+        if(authenticationservice.existsCode(employee.getAuthentication().getCode())) {
+            return getEmployeeRegister(employee);
+        }
+
+        if(res.hasErrors()) {
+            employee.setName(null);
+            employee.getAuthentication().setCode(null);
+            return getEmployeeRegister(employee);
+        }
+
         employee.setDeleteFlag(0);
         employee.setCreatedAt(now);
         employee.setUpdateAt(now);
         employee.getAuthentication().setEmployee(employee);
 
-        if(res.hasErrors()) {
-            return getEmployeeRegister(employee);
-        }
+
 
         service.saveEmployee(employee);
 
-        return "redirect:/employee/employeeregister";
+        return "redirect:/employee/employeelist";
     }
 
     @GetMapping("/employeeupdate/{id}")

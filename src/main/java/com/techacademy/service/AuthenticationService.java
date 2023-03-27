@@ -1,7 +1,6 @@
 package com.techacademy.service;
 
 
-
 import org.springframework.stereotype.Service;
 
 import com.techacademy.repository.AuthenticationRepository;
@@ -14,5 +13,8 @@ public class AuthenticationService {
         this.repository = authentication;
     }
 
+    public boolean existsCode(String code) {
+        return repository.existsById(code);
+    }
 
 }

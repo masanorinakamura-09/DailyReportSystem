@@ -24,13 +24,14 @@
             <label for="code" class="form">社員番号</label>
             <input type="text" th:field="*{authentication.code}">
              <span th:errors="*{authentication.code}" class="err"></span>
+             <span th:if="*{authentication.code}!=null" class="err">登録済みの社員番号です。</span>
             <br>
             <label for="name" class="form">氏名</label>
             <input type="text" th:field="*{name}">
              <span th:errors="*{name}" class="err"></span>
             <br>
             <label for="password" class="form">パスワード</label>
-            <input type="text" th:field="*{authentication.password}">
+            <input type="password" th:field="*{authentication.password}">
             <span th:errors="*{authentication.password}" class="err"></span>
             <br>
             <label for="role" class="form">権限</label>
@@ -39,7 +40,7 @@
                                         th:value="${item}" th:text="${item}">
             </select>
             <br>
-            <input type="submit" value="投稿" class="form">
+            <input type="submit" value="投稿"  class="form">
             <br>
             <a th:href="@{/employee/employeelist}" th:text="一覧に戻る"></a>
     </form>
