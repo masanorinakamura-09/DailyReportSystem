@@ -25,6 +25,7 @@ public class EmployeeService {
         return repository.count();
     }
 
+
     public Employee getEmployeeDetail(Integer id) {
 
         return repository.findById(id).get();
