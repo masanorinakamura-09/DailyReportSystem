@@ -27,6 +27,14 @@ public class UserDetail implements UserDetails{
         return employee;
     }
 
+    public String getUserRoll() {
+        return employee.getAuthentication().getRole().name();
+    }
+
+    public String getLoginName() {
+        return employee.getName();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // TODO 自動生成されたメソッド・スタブ

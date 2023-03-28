@@ -9,14 +9,16 @@
     <nav class="global_navi">
         <ul>
         <li><a th:href="@{/}" th:text="日報管理システム" ></a></li>
-        <li><a th:href="@{/employee/employeelist/}" th:text="従業員管理" ></a></li>
+        <li><a th:href="@{/employee/employeelist/}" th:text="従業員管理" th:if="${userroll} == '管理者'"></a></li>
         <li>日報管理</li>
-        <li>氏名 さん</li>
+        <li th:text="${username}+' さん'"></li>
         <li><form method="post" th:action="@{/logout}" ><input type="submit" value="ログアウト" class="logout"></form></li>
         </ul>
     </nav>
+
 </header>
 <body>
     <h1>日報管理システムへようこそ</h1>
+
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.techacademy.controller;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import com.techacademy.entity.Employee;
 import com.techacademy.entity.Authentication.Register;
 import com.techacademy.service.AuthenticationService;
 import com.techacademy.service.EmployeeService;
+import com.techacademy.service.UserDetail;
 
 @Controller
 @RequestMapping("employee")
@@ -36,39 +38,45 @@ public class EmployeeController {
     }
 
     @GetMapping("/employeelist")
-    public String getEmployeeList(Model model) {
+    public String getEmployeeList(@AuthenticationPrincipal UserDetail userdetail,Model model) {
 
         model.addAttribute("employeelist",service.getEmployeeList());
         model.addAttribute("index",service.getIndex());
+        model.addAttribute("username",userdetail.getLoginName());
+        model.addAttribute("userroll",userdetail.getUserRoll());
 
         return "DailyReportSystem/employeeList";
     }
     @GetMapping("/employeedetail/{id}")
-    public String getEmployeeDetail(@PathVariable("id") Integer id,Model model) {
+    public String getEmployeeDetail(@PathVariable("id") Integer id,@AuthenticationPrincipal UserDetail userdetail,Model model) {
 
         model.addAttribute("employeedetail",service.getEmployeeDetail(id));
+        model.addAttribute("username",userdetail.getLoginName());
+        model.addAttribute("userroll",userdetail.getUserRoll());
         return "DailyReportSystem/employeedetail";
     }
 
 
     @GetMapping("/employeeregister")
-    public String getEmployeeRegister(@ModelAttribute Employee employee){
-
+    public String getEmployeeRegister(Employee employee,@AuthenticationPrincipal UserDetail userdetail,Model model){
+        model.addAttribute("employee",employee);
+        model.addAttribute("username",userdetail.getLoginName());
+        model.addAttribute("userroll",userdetail.getUserRoll());
         return "DailyReportSystem/employeeregister";
     }
 
     @PostMapping("/employeeregister")
-    public String postEmployeeRegister(@Validated({Register.class}) Employee employee,BindingResult res){
+    public String postEmployeeRegister(@Validated({Register.class}) Employee employee,BindingResult res,@AuthenticationPrincipal UserDetail userdetail,Model model){
         LocalDateTime now=LocalDateTime.now();
 
         if(authenticationservice.existsCode(employee.getAuthentication().getCode())) {
-            return getEmployeeRegister(employee);
+            return getEmployeeRegister(employee,userdetail,model);
         }
 
         if(res.hasErrors()) {
             employee.setName(null);
             employee.getAuthentication().setCode(null);
-            return getEmployeeRegister(employee);
+            return getEmployeeRegister(employee,userdetail,model);
         }
 
         String password=employee.getAuthentication().getPassword();
@@ -87,20 +95,22 @@ public class EmployeeController {
     }
 
     @GetMapping("/employeeupdate/{id}")
-    public String getEmployeeUpdate(@PathVariable("id") Integer id,Model model) {
+    public String getEmployeeUpdate(@PathVariable("id") Integer id,@AuthenticationPrincipal UserDetail userdetail,Model model) {
         if(id!=null) {
             model.addAttribute("employee",service.getEmployeeDetail(id));
         }
+        model.addAttribute("username",userdetail.getLoginName());
+        model.addAttribute("userroll",userdetail.getUserRoll());
     return "DailyReportSystem/employeeupdate";
     }
 
     @PostMapping("/employeeupdate/{id}")
     public String postEmployeeUpdate(@RequestParam(name="password") String password,
-            @Validated Employee employee,BindingResult res,Model model){
+            @Validated Employee employee,BindingResult res,@AuthenticationPrincipal UserDetail userdetail,Model model){
 
         if(res.hasErrors()) {
             model.addAttribute("employee",employee);
-            return getEmployeeUpdate(null,model);
+            return getEmployeeUpdate(null,userdetail,model);
         }
 
         LocalDateTime now=LocalDateTime.now();
