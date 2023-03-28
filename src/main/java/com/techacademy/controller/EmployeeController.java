@@ -2,6 +2,8 @@ package com.techacademy.controller;
 
 import java.time.LocalDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +25,9 @@ import com.techacademy.service.EmployeeService;
 public class EmployeeController {
     private final EmployeeService service;
     private final AuthenticationService authenticationservice;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     public EmployeeController(EmployeeService service,AuthenticationService authenticationservice) {
@@ -66,6 +71,9 @@ public class EmployeeController {
             return getEmployeeRegister(employee);
         }
 
+        String password=employee.getAuthentication().getPassword();
+        employee.getAuthentication().setPassword(passwordEncoder.encode(password));
+
         employee.setDeleteFlag(0);
         employee.setCreatedAt(now);
         employee.setUpdateAt(now);
@@ -100,6 +108,8 @@ public class EmployeeController {
          if(password==("")) {
         Employee oldemployee=service.getEmployeeDetail(employee.getId());
         password=oldemployee.getAuthentication().getPassword();
+         }else {
+             password=passwordEncoder.encode(password);
          }
 
         employee.getAuthentication().setPassword(password);

@@ -20,7 +20,9 @@ public class SecurityConfig {
                       .logout(logout -> logout.logoutSuccessUrl("/login"))
                       .authorizeHttpRequests(auth -> auth.requestMatchers(
                               PathRequest.toStaticResources().atCommonLocations())
-                              .permitAll().anyRequest().authenticated()
+                              .permitAll()
+                              .mvcMatchers("/employee/**").hasAuthority("管理者")
+                              .anyRequest().authenticated()
                               );
         return http.build();
     }

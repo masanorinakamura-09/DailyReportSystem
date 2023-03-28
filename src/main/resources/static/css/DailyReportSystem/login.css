@@ -26,37 +26,15 @@ header{
 
 }
 
-.global_navi ul li a{
-        color:#ffffff;
-        text-decoration: none;
-}
-
-.global_navi ul li a:visited{
-        color:#ffffff;
-}
-
-.global_navi ul li a:hover{
-        color:#0000ff;
-}
-
 .global_navi ul li:first-child{
     font-size:25px;
     margin:10px 0px 0px ;
 }
 
-.global_navi ul li:last-child{
-        margin:20px 0px 0px auto;
+.form{
+    display:block;
 }
 
-
-
-.logout{
-    border: none;
-  background: transparent;
-  color:#ffffff;
-  font-size:16px;
+.err{
+    color:#ff0000;
 }
-
-.logout:hover{
-    color:#0000ff;
-    }
