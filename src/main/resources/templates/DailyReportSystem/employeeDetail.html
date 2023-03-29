@@ -41,7 +41,7 @@
 
         <tr>
             <th>更新日時</th>
-            <td th:text="${#temporals.format(employeedetail.updateAt,'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${#temporals.format(employeedetail.updatedAt,'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
     </table>
     <a th:href="@{/employee/employeeupdate/{id}/(id=${employeedetail.id})}" th:text="この従業員情報を編集する"></a>

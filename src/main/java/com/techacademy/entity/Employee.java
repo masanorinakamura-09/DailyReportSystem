@@ -43,7 +43,7 @@ public class Employee {
     private LocalDateTime createdAt;
 
     @Column(nullable=false,columnDefinition="TIMESTAMP")
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
 
 
 

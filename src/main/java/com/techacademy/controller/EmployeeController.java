@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,7 +83,7 @@ public class EmployeeController {
 
         employee.setDeleteFlag(0);
         employee.setCreatedAt(now);
-        employee.setUpdateAt(now);
+        employee.setUpdatedAt(now);
         employee.getAuthentication().setEmployee(employee);
 
 
@@ -124,7 +123,7 @@ public class EmployeeController {
 
         employee.getAuthentication().setPassword(password);
         employee.setDeleteFlag(0);
-        employee.setUpdateAt(now);
+        employee.setUpdatedAt(now);
         employee.getAuthentication().setEmployee(employee);
 
 
@@ -140,7 +139,7 @@ public class EmployeeController {
         LocalDateTime now=LocalDateTime.now();
 
         employee.setDeleteFlag(1);
-        employee.setUpdateAt(now);
+        employee.setUpdatedAt(now);
         service.saveEmployee(employee);
         return "redirect:/employee/employeelist/";
 
