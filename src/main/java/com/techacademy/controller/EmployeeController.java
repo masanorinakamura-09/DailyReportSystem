@@ -52,7 +52,7 @@ public class EmployeeController {
         model.addAttribute("employeedetail",service.getEmployeeDetail(id));
         model.addAttribute("username",userdetail.getLoginName());
         model.addAttribute("userroll",userdetail.getUserRoll());
-        return "DailyReportSystem/employeedetail";
+        return "DailyReportSystem/employeeDetail";
     }
 
 
@@ -61,7 +61,7 @@ public class EmployeeController {
         model.addAttribute("employee",employee);
         model.addAttribute("username",userdetail.getLoginName());
         model.addAttribute("userroll",userdetail.getUserRoll());
-        return "DailyReportSystem/employeeregister";
+        return "DailyReportSystem/employeeRegister";
     }
 
     @PostMapping("/employeeregister")
@@ -100,7 +100,7 @@ public class EmployeeController {
         }
         model.addAttribute("username",userdetail.getLoginName());
         model.addAttribute("userroll",userdetail.getUserRoll());
-    return "DailyReportSystem/employeeupdate";
+    return "DailyReportSystem/employeeUpdate";
     }
 
     @PostMapping("/employeeupdate/{id}")
