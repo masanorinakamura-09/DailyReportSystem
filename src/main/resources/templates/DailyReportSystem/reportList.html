@@ -17,20 +17,22 @@
     </nav>
 </header>
 <body>
-    <h1>従業員 一覧</h1>
+    <h1>日報 一覧</h1>
     <table>
         <tr>
-            <th>社員番号</th>
             <th>氏名</th>
+            <th>日付</th>
+            <th>タイトル</th>
             <th>操作</th>
         </tr>
-        <tr th:each="employee : ${employeelist}">
-            <td th:text="${employee.authentication.code}"></td>
-            <td th:text="${employee.name}"></td>
-            <td> <a th:href="@{/employee/employeedetail/{id}/(id=${employee.id})}" th:text="詳細を見る"></a></td>
+        <tr th:each="report : ${reportlist}">
+            <td th:text="${report.employee.name}"></td>
+            <td th:text="${report.reportDate}"></td>
+            <td th:text="${report.title}"></td>
+            <td> <a th:href="@{/report/reportdetail/{id}/(id=${report.id})}" th:text="詳細を見る"></a></td>
         </tr>
     </table>
     <p　th:text="'（全'+${index}+'件）'"></p>
-    <a th:href="@{/employee/employeeregister}"　th:text="新規従業員の登録"></a>
+    <a th:href="@{/report/reportregister}"　th:text="新規日報の登録"></a>
 </body>
 </html>
