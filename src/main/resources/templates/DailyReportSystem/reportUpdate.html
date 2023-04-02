@@ -17,19 +17,19 @@
     </nav>
 </header>
 <body>
-    <h1>日報　新規登録ページ</h1>
+    <h1>日報　編集ページ</h1>
 
-          <form method="post" th:action="@{/report/reportregister}"  th:object="${report}" class="report_form">
+          <form method="post" th:action="@{/report/reportupdate/{id}/(id=${report.id})}"  th:object="${report}" class="report_form">
           <label for="Date" class="form">日付</label>
-            <input type="date" name="reportDate" th:value="${currentdate}" th:max="${currentdate}">
+            <input type="date" name="reportDate" th:value="${reportdate}" th:max="${reportdate}">
             <span th:errors="*{reportDate}" class="err"></span>
-          <p>氏名<br>[[${username}]]</p>
+            <p>氏名<br>[[${username}]]</p>
           <label for="title" class="form">タイトル</label>
             <input type="text" th:field="*{title}">
              <span th:errors="*{title}" class="err"></span>
             <br>
           <label for="content" class="form">内容 <span th:errors="*{content}" class="err"></span></label>
-            <textarea id="content" name="content" ></textarea>
+            <textarea id="content" name="content" th:text="*{content}"></textarea>
             <br>
             <input type="submit" value="投稿"  class="form">
             <br>

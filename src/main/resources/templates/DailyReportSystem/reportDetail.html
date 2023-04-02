@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>日報管理システム</title>
+    <link rel="stylesheet" th:href="@{/css/DailyReportSystem/employee/reportdetail.css}">
+</head>
+<header>
+    <nav class="global_navi">
+        <ul>
+        <li><a th:href="@{/}" th:text="日報管理システム" ></a></li>
+        <li><a th:href="@{/employee/employeelist/}" th:text="従業員管理" th:if="${userroll} == '管理者'"></a></li>
+        <li><a th:href="@{/report/reportlist/}" th:text="日報管理"></a></li>
+        <li th:text="${username}+' さん'"></li>
+        <li><form method="post" th:action="@{/logout}" ><input type="submit" value="ログアウト" class="logout"></form></li>
+        </ul>
+    </nav>
+</header>
+<body>
+    <h1 th:text="'日報 詳細ページ'"></h1>
+    <table class="detail_table">
+        <tr>
+            <th>氏名</th>
+            <td th:text="${report.employee.name}"></td>
+        </tr>
+
+        <tr>
+            <th>日付</th>
+            <td th:text="${report.reportDate}"></td>
+        </tr>
+        <tr>
+            <th>タイトル</th>
+            <td th:text="${report.title}"></td>
+        </tr>
+        <tr>
+            <th>内容</th>
+            <td><pre>[[${report.content}]]</pre></td>
+        </tr>
+        <tr>
+            <th>登録日時</th>
+            <td th:text="${#temporals.format(report.createdAt,'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+
+        <tr>
+            <th>更新日時</th>
+            <td th:text="${#temporals.format(report.updatedAt,'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+    </table>
+        <a th:href="@{/report/reportupdate/{id}/(id=${report.id})}" th:text="この日報を編集する" th:if="${report.employee.id} == ${userid}"></a>
+    <br>
+    <a th:href="@{/report/reportlist}" th:text="一覧に戻る"></a>
+</body>
+</html>

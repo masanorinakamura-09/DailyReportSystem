@@ -35,6 +35,11 @@ public class UserDetail implements UserDetails{
         return employee.getName();
     }
 
+    public Integer getUserId() {
+        return employee.getId();
+
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // TODO 自動生成されたメソッド・スタブ

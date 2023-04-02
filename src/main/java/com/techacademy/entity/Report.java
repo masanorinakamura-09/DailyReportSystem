@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PastOrPresent;
 
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,6 +30,7 @@ public class Report {
 
     @Column(nullable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
+    @PastOrPresent
     private LocalDate reportDate;
 
     @Column(length=255,nullable=false)
@@ -40,12 +42,8 @@ public class Report {
     @NotEmpty
     private String content;
 
-
-//    @Column(nullable=false,name="employee_id")
-//    private Integer employeeId;//
-
     @ManyToOne
-    @JoinColumn(name="employee_id",referencedColumnName="id")
+    @JoinColumn(name="employee_id",referencedColumnName="id",nullable=false)
     private Employee employee;
 
     @Column(nullable=false,updatable=false,columnDefinition="TIMESTAMP")

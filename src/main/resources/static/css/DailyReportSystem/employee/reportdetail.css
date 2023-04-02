@@ -1,0 +1,24 @@
+@charset "UTF-8";
+@import url("employeeheader.css");
+
+table{
+    width:580px;
+    margin:0px;
+    border-collapse:collapse;
+    }
+
+th,td{
+    border:solid 1px;
+    text-align:left;
+    padding: 10px;
+}
+
+
+
+pre {
+    font-family: "Hiragino Kaku Gothic Pro",Meiryo,"MS PGothic",Helvetica,Arial,sans-serif;
+    margin:1px;
+
+}
+
+

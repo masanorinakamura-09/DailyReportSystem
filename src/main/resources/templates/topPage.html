@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>日報管理システム</title>
-    <link rel="stylesheet" th:href="@{/css/DailyReportSystem/employee/toppage.css}">
+    <link rel="stylesheet" th:href="@{/css/DailyReportSystem/toppage.css}">
 </head>
 <header>
     <nav class="global_navi">
@@ -20,5 +20,21 @@
 <body>
     <h1>日報管理システムへようこそ</h1>
 
+    <table>
+        <tr>
+            <th>氏名</th>
+            <th>日付</th>
+            <th>タイトル</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="report : ${reportlist}">
+            <td th:text="${report.employee.name}"></td>
+            <td th:text="${report.reportDate}"></td>
+            <td th:text="${report.title}"></td>
+            <td> <a th:href="@{/report/reportdetail/{id}/(id=${report.id})}" th:text="詳細を見る"></a></td>
+        </tr>
+    </table>
+    <p　th:text="'（全'+${index}+'件）'"></p>
+    <a th:href="@{/report/reportregister}"　th:text="新規日報の登録"></a>
 </body>
 </html>
