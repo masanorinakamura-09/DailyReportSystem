@@ -33,7 +33,7 @@ public class ReportController {
     public String getReportList(@AuthenticationPrincipal UserDetail userdetail,Model model) {
 
         model.addAttribute("reportlist", service.getReportList());
-        model.addAttribute("index", service.getIndex());
+        model.addAttribute("index", service.getReportList().size());
 
         model.addAttribute("username",userdetail.getLoginName());
         model.addAttribute("userroll",userdetail.getUserRoll());

@@ -19,7 +19,7 @@ public class ReportService {
     }
 
     public List<Report> getReportList(){
-            return repository.findAll();
+            return repository.getReportList();
     }
 
     public List<Report> getEmployeeReportList(Employee employee){
