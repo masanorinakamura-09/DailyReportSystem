@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>日報管理システム</title>
+    <link rel="stylesheet" th:href="@{/css/DailyReportSystem/employee/employeelist.css}">
+</head>
+<header>
+    <nav class="global_navi">
+        <ul>
+        <li><a th:href="@{/}" th:text="日報管理システム" ></a></li>
+        <li><a th:href="@{/employee/employeelist/}" th:text="従業員管理" th:if="${userroll} == '管理者'"></a></li>
+        <li><a th:href="@{/report/reportlist/}" th:text="日報管理"></a></li>
+        <li><a th:href="@{/timecard/}" th:text="勤怠管理"></a></li>
+        <li th:text="${username}+' さん'"></li>
+        <li><form method="post" th:action="@{/logout}" ><input type="submit" value="ログアウト" class="logout"></form></li>
+        </ul>
+    </nav>
+</header>
+<body>
+    <h1>勤怠 一覧</h1>
+    <table>
+        <tr>
+            <th>氏名</th>
+            <th>日付</th>
+            <th>出勤時間</th>
+            <th>退勤時間</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="timecard : ${timecardlist}">
+            <td th:text="${timecard.employee.name}"></td>
+            <td th:text="${timecard.timecardDate}"></td>
+            <td th:text="${timecard.workTime}"></td>
+            <td th:text="${timecard.leavingworkTime}"></td>
+        </tr>
+    </table>
+    <a th:href="@{/timecard/}"　th:text="タイムカードへ"></a>
+</body>
+</html>

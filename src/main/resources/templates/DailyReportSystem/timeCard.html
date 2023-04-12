@@ -51,5 +51,6 @@
                         <span th:if="${timecard.leavingworkTime != null && timecard.timecardDate == null}" class="err">出勤されてません。</span>
             <br>
     </form>
+    <a th:href="@{/timecard/timecardlist/}" th:text="勤怠管理" th:if="${userroll} == '管理者'"></a>
 </body>
 </html>

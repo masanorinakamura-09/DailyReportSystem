@@ -2,6 +2,7 @@ package com.techacademy.controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -72,5 +73,18 @@ public class TimeCardController {
         timecard.setLeavingworkTime(time);
         service.setTimeCard(timecard);
         return "redirect:/timecard/";
+
+    }
+    @GetMapping("/timecardlist/")
+    public String getTimecardList(@AuthenticationPrincipal UserDetail userdetail,Model model) {
+        LocalDate date=LocalDate.now();
+        List<TimeCard> timecard=service.getTimeCardList(date);
+
+        model.addAttribute("timecardlist",service.getTimeCardList(date));
+        model.addAttribute("username",userdetail.getLoginName());
+        model.addAttribute("userroll",userdetail.getUserRoll());
+
+        return "DailyReportSystem/timecardList";
+
     }
 }
