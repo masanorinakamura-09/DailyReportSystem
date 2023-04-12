@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -78,13 +79,24 @@ public class TimeCardController {
     @GetMapping("/timecardlist/")
     public String getTimecardList(@AuthenticationPrincipal UserDetail userdetail,Model model) {
         LocalDate date=LocalDate.now();
-        List<TimeCard> timecard=service.getTimeCardList(date);
 
         model.addAttribute("timecardlist",service.getTimeCardList(date));
         model.addAttribute("username",userdetail.getLoginName());
         model.addAttribute("userroll",userdetail.getUserRoll());
 
         return "DailyReportSystem/timecardList";
+
+    }
+    @GetMapping("/timecardupdate/{id}")
+    public String getTimeCardUpdate(@PathVariable("id") Integer id,
+                                    @AuthenticationPrincipal UserDetail userdetail,
+                                    Model model) {
+        model.addAttribute("timecard",service.getTimeCard(id));
+        model.addAttribute("Date",service.getTimeCard(id).getTimecardDate());
+
+        model.addAttribute("username",userdetail.getLoginName());
+        model.addAttribute("userroll",userdetail.getUserRoll());
+        return "DailyReportSystem/timecardUpdate";
 
     }
 }

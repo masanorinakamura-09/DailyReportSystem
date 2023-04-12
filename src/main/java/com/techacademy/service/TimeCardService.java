@@ -24,6 +24,10 @@ public class TimeCardService {
         return repository.findByTimecardDateAndEmployeeId(date, id);
     }
 
+    public TimeCard getTimeCard(Integer id) {
+        return repository.findById(id).get();
+    }
+
     public boolean existsWokrTime(LocalDate date,Integer id) {
         return repository.existsByTimecardDateAndEmployeeId(date,id);
     }

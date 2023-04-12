@@ -32,6 +32,7 @@
             <td th:text="${timecard.timecardDate}"></td>
             <td th:text="${timecard.workTime}"></td>
             <td th:text="${timecard.leavingworkTime}"></td>
+            <td> <a th:href="@{/timecard/timecardupdate/{id}/(id=${timecard.id})}" th:text="修正をする"></a></td>
         </tr>
     </table>
     <a th:href="@{/timecard/}"　th:text="タイムカードへ"></a>
