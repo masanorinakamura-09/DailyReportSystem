@@ -1,0 +1,10 @@
+@charset "UTF-8";
+@import url("employeeheader.css");
+
+.form{
+    display:block;
+}
+
+.err{
+    color: #ff0000
+}

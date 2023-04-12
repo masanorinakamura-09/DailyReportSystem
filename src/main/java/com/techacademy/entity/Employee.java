@@ -37,6 +37,10 @@ public class Employee {
     @Valid
     private List<Report> report;
 
+    @OneToMany(mappedBy="employee", cascade = CascadeType.ALL)
+    @Valid
+    private List<TimeCard> timecard;
+
     @Column(length=20,nullable=false)
     @NotEmpty
     @Length(max=20)

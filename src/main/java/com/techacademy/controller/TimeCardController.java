@@ -25,6 +25,9 @@ public class TimeCardController {
 
     @GetMapping("/")
     public String GetTimeCardTop(TimeCard timecard,@AuthenticationPrincipal UserDetail userdetail,Model model) {
+        /*if(timecard.getTimecardDate()!=null) {
+
+        }*/
         model.addAttribute("timecard",timecard);
         model.addAttribute("username",userdetail.getLoginName());
         model.addAttribute("userroll",userdetail.getUserRoll());
@@ -32,22 +35,41 @@ public class TimeCardController {
     }
 
     @PostMapping("/worktime")
-    public String postWorkTime(TimeCard timecard,@AuthenticationPrincipal UserDetail userdetail) {
+    public String postWorkTime(TimeCard timecard,@AuthenticationPrincipal UserDetail userdetail,Model model) {
+
+        Integer id=userdetail.getUserId();
+        LocalDate now=LocalDate.now();
+        timecard.setTimecardDate(now);
+
+        if(service.existsWokrTime(now,id )) {
+            return GetTimeCardTop(timecard,userdetail,model);
+        }
 
         timecard.setEmployee(userdetail.getEmployee());
-        timecard.setTimecardDate(LocalDate.now());
         timecard.setWorkTime(LocalTime.now());
         service.setTimeCard(timecard);
         return "redirect:/timecard/";
     }
 
     @PostMapping("/leavingworktime")
-    public String postLeavingworktime(TimeCard timecard,@AuthenticationPrincipal UserDetail userdetail) {
+    public String postLeavingworktime(TimeCard timecard,@AuthenticationPrincipal UserDetail userdetail,Model model) {
 
-        timecard=service.getTimeCard(LocalDate.now(), userdetail.getUserId());
-        /*timecard.setEmployee(userdetail.getEmployee());
-        timecard.setTimecardDate(LocalDate.now());*/
-        timecard.setLeavingworkTime(LocalTime.now());
+        Integer id=userdetail.getUserId();
+        LocalDate date=LocalDate.now();
+        LocalTime time=LocalTime.now();
+
+        if(!service.existsWokrTime(date,id)) {
+            timecard.setLeavingworkTime(time);
+            return GetTimeCardTop(timecard,userdetail,model);
+        }
+
+        timecard=service.getTimeCard(date, id);
+
+        if(timecard.getLeavingworkTime()!=null) {
+            timecard.setLeavingworkTime(time);
+            return GetTimeCardTop(timecard,userdetail,model);
+        }
+        timecard.setLeavingworkTime(time);
         service.setTimeCard(timecard);
         return "redirect:/timecard/";
     }

@@ -1,6 +1,7 @@
 package com.techacademy.service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,10 @@ public class TimeCardService {
 
     public TimeCard getTimeCard(LocalDate date,Integer id) {
         return repository.findByTimecardDateAndEmployeeId(date, id);
+    }
+
+    public boolean existsWokrTime(LocalDate date,Integer id) {
+        return repository.existsByTimecardDateAndEmployeeId(date,id);
     }
 
 }
