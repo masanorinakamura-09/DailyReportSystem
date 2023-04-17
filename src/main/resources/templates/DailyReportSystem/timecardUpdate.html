@@ -23,7 +23,7 @@
           <form method="post" th:action="@{/timecard/timecardupdate/{id}/(id=${timecard.id})}"  th:object="${timecard}" class="report_form">
           <p>氏名<br>[[*{employee.name}]]</p>
           <label for="Date" class="form">日付</label>
-            <input type="date" name="timecardDate" th:value="*{timecardDate}" th:max="${Date}">
+            <input type="date" name="timecardDate" th:value="*{timecardDate}" th:max="${Date}" readonly>
             <span th:errors="*{timecardDate}" class="err"></span>
 
           <label for="workTime" class="form">出勤時間</label>

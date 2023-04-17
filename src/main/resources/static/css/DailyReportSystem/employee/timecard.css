@@ -8,3 +8,28 @@
 .err{
     color: #ff0000
 }
+
+h1{
+        margin-left:50px;
+}
+
+.clock{
+    margin-left:50px;
+    width:100px;
+    height:100px;
+    color:#ff0000;
+    font-size:32pt;
+}
+
+.box{
+    display: flex;
+}
+
+
+
+
+.form{
+    width:150px;
+    margin:5px;
+    font-size:15pt;
+    }

@@ -19,7 +19,7 @@
 </header>
 <body onload="strClock();">
     <h1>タイムカード</h1>
-      <div id="pos"></div>
+      <div id="pos" class="clock"></div>
   <script type="text/javascript">
 
     // 時刻取得関数
@@ -30,8 +30,6 @@
       var ss = ('0' + now.getSeconds()).slice(-2);
       nowtime = hh + ":" + mm + ":" + ss;
       var id1 = document.getElementById('pos');
-      id1.style.fontSize = "32pt";
-      id1.style.color = "red";
       id1.innerHTML = nowtime;
     }
 
@@ -40,7 +38,8 @@
       setInterval("getTime();", 1000);
     }
   </script>
-              <form method="post" th:action="@{/timecard/worktime}"  th:object="${timecard}" class="timecard_form">
+    <div class="box">
+    <form method="post" th:action="@{/timecard/worktime}"  th:object="${timecard}" class="timecard_form">
             <input type="submit" value="出勤"  class="form">
             <span th:if="${timecard.timecardDate != null && timecard.leavingworkTime == null}" class="err">出勤済みです。</span>
             <br>
@@ -51,6 +50,8 @@
                         <span th:if="${timecard.leavingworkTime != null && timecard.timecardDate == null}" class="err">出勤されてません。</span>
             <br>
     </form>
-    <a th:href="@{/timecard/timecardlist/}" th:text="勤怠管理" th:if="${userroll} == '管理者'"></a>
+    </div>
+    <br>
+    <a th:href="@{/timecard/timecardlist/}" th:text="勤怠管理画面へ" th:if="${userroll} == '管理者'"></a>
 </body>
 </html>

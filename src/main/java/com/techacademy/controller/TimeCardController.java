@@ -76,7 +76,7 @@ public class TimeCardController {
         return "redirect:/timecard/";
 
     }
-    @GetMapping("/timecardlist/")
+    @GetMapping("/timecardlist")
     public String getTimecardList(@AuthenticationPrincipal UserDetail userdetail,Model model) {
         LocalDate date=LocalDate.now();
 
@@ -97,6 +97,19 @@ public class TimeCardController {
         model.addAttribute("username",userdetail.getLoginName());
         model.addAttribute("userroll",userdetail.getUserRoll());
         return "DailyReportSystem/timecardUpdate";
+
+    }
+
+    @PostMapping("/timecardupdate/{id}")
+    public String postTimeCardUpdate(@PathVariable("id") Integer id,
+                                    @AuthenticationPrincipal UserDetail userdetail,
+                                    TimeCard timecard,
+                                    Model model){
+
+
+            timecard.setEmployee(service.getTimeCard(id).getEmployee());
+            service.setTimeCard(timecard);
+            return "redirect:/timecard/timecardlist";
 
     }
 }
