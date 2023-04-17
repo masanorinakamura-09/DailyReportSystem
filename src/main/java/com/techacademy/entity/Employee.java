@@ -41,6 +41,10 @@ public class Employee {
     @Valid
     private List<TimeCard> timecard;
 
+    @OneToMany(mappedBy="employee", cascade = CascadeType.ALL)
+    @Valid
+    private List<Follower> follower;
+
     @Column(length=20,nullable=false)
     @NotEmpty
     @Length(max=20)
