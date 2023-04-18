@@ -1,8 +1,6 @@
 package com.techacademy.entity;
 
 
-import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Where;
 
 import lombok.Data;
 
@@ -22,7 +19,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="follower_list")
-public class Follower {
+public class FollowList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

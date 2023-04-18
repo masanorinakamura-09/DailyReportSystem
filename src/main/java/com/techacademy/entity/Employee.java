@@ -43,7 +43,7 @@ public class Employee {
 
     @OneToMany(mappedBy="employee", cascade = CascadeType.ALL)
     @Valid
-    private List<Follower> follower;
+    private List<FollowList> follower;
 
     @Column(length=20,nullable=false)
     @NotEmpty

@@ -3,6 +3,8 @@ package com.techacademy.controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techacademy.entity.Employee;
+import com.techacademy.entity.FollowList;
 import com.techacademy.entity.Report;
+import com.techacademy.service.FollowService;
 import com.techacademy.service.ReportService;
 import com.techacademy.service.UserDetail;
 
@@ -24,9 +28,11 @@ import com.techacademy.service.UserDetail;
 @RequestMapping("report")
 public class ReportController {
     private final ReportService service;
+    private final FollowService followservice;
 
-    public ReportController(ReportService service) {
+    public ReportController(ReportService service, FollowService followservice) {
         this.service = service;
+        this.followservice = followservice;
     }
 
     @GetMapping("/reportlist")
@@ -37,6 +43,30 @@ public class ReportController {
 
         model.addAttribute("username",userdetail.getLoginName());
         model.addAttribute("userroll",userdetail.getUserRoll());
+
+        model.addAttribute("follow",false);
+
+        return "DailyReportSystem/reportList";
+
+    }
+
+    @GetMapping("/reportlist/followreportlist")
+    public String getFollowReportList(@AuthenticationPrincipal UserDetail userdetail,Model model) {
+        List<Report> reportlist=new ArrayList<Report>();
+        List<FollowList> followlist=followservice.getFollowList(userdetail.getUserId());
+
+        for(FollowList follower:followlist) {
+            reportlist.addAll(service.getEmployeeReportList(follower.getFollower()));
+        }
+
+        model.addAttribute("reportlist",reportlist );
+        model.addAttribute("index", reportlist.size());
+
+        model.addAttribute("username",userdetail.getLoginName());
+        model.addAttribute("userroll",userdetail.getUserRoll());
+        model.addAttribute("userid",userdetail.getUserId());
+
+        model.addAttribute("follow",true);
 
         return "DailyReportSystem/reportList";
 
