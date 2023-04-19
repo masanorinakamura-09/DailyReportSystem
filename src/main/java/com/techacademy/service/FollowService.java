@@ -2,6 +2,8 @@ package com.techacademy.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.techacademy.entity.FollowList;
@@ -23,6 +25,17 @@ public class FollowService {
         return repository.existsByEmployeeIdAndFollowerId(eid,fid);
     }
 
+    public FollowList getfollowlist(Integer eid,Integer fid) {
+        return repository.findByEmployeeIdAndFollowerId(eid, fid);
+
+    }
+
+    @Transactional
+    public void cancelFollower(Integer id) {
+        repository.deleteById(id);
+    }
+
+    @Transactional
     public FollowList saveFollowList(FollowList follow) {
         return repository.save(follow);
 

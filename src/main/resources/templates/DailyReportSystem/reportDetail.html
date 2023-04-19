@@ -47,7 +47,8 @@
             <td th:text="${#temporals.format(report.updatedAt,'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
     </table>
-        <a th:href="@{/follow/saveFollower/{id}/(id=${report.employee.id})}" th:text="フォローする" th:if="${userid} != ${report.employee.id}"></a>
+        <a th:href="@{/follow/saveFollower/{id}/(id=${report.employee.id})}" th:text="フォローする" th:if="${userid} != ${report.employee.id} and ${follow}!=true"></a>
+        <a th:href="@{/follow/cancelFollower/{id}/(id=${report.employee.id})}" th:text="フォロー解除する" th:if="${userid} != ${report.employee.id} and ${follow}==true"></a>
         <a th:href="@{/report/reportupdate/{id}/(id=${report.id})}" th:text="この日報を編集する" th:if="${report.employee.id} == ${userid}"></a>
     <br>
     <a th:href="@{/report/reportlist}" th:text="一覧に戻る"></a>

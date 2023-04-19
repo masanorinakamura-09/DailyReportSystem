@@ -35,8 +35,15 @@ public class FollowController {
         }
         service.saveFollowList(followlist);
         return "redirect:/report/reportdetail/{id}/";
+    }
 
+    @GetMapping("/cancelFollower/{id}")
+    public String cancelFollower(@PathVariable("id") Integer id,
+            @AuthenticationPrincipal UserDetail userdetail,Model model,FollowList followlist) {
+        followlist=service.getfollowlist(userdetail.getUserId(), id);
+        service.cancelFollower(followlist.getId());
 
+                return "redirect:/report/reportdetail/{id}/";
 
     }
 

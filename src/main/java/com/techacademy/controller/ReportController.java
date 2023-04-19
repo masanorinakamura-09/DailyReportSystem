@@ -74,12 +74,17 @@ public class ReportController {
 
      @GetMapping("/reportdetail/{id}")
         public String getReportDetail(@PathVariable("id") Integer id,@AuthenticationPrincipal UserDetail userdetail,Model model) {
-
             model.addAttribute("report",service.getReport(id));
 
             model.addAttribute("userid", userdetail.getUserId());
             model.addAttribute("username",userdetail.getLoginName());
             model.addAttribute("userroll",userdetail.getUserRoll());
+
+            if(followservice.exitsFollowList(userdetail.getUserId(), id)) {
+                model.addAttribute("follow",true);
+            }else {
+                model.addAttribute("follow",false);
+            }
             return "DailyReportSystem/reportDetail";
         }
 
