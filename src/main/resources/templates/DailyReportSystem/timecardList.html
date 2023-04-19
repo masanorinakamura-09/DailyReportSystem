@@ -19,17 +19,20 @@
 </header>
 <body>
     <h1>勤怠 一覧</h1>
+          <form method="post" th:action="@{/timecard/timecardlist}"  th:object="${date}" class="report_form">
+          <label for="Date" class="form">日付</label>
+          <input type="date" name="Date" th:value="${date}" th:max="${nowDate}">
+          <input type="submit" value="日付更新"  class="form">
+          </form>
     <table>
         <tr>
             <th>氏名</th>
-            <th>日付</th>
             <th>出勤時間</th>
             <th>退勤時間</th>
             <th>操作</th>
         </tr>
         <tr th:each="timecard : ${timecardlist}">
             <td th:text="${timecard.employee.name}"></td>
-            <td th:text="${timecard.timecardDate}"></td>
             <td th:text="${timecard.workTime}"></td>
             <td th:text="${timecard.leavingworkTime}"></td>
             <td> <a th:href="@{/timecard/timecardupdate/{id}/(id=${timecard.id})}" th:text="修正をする"></a></td>

@@ -2,7 +2,7 @@ package com.techacademy.controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techacademy.entity.TimeCard;
 import com.techacademy.service.TimeCardService;
@@ -77,16 +78,30 @@ public class TimeCardController {
 
     }
     @GetMapping("/timecardlist")
-    public String getTimecardList(@AuthenticationPrincipal UserDetail userdetail,Model model) {
-        LocalDate date=LocalDate.now();
+    public String getTimecardList(@AuthenticationPrincipal UserDetail userdetail,Model model,LocalDate date) {
+
+        LocalDate nowDate=LocalDate.now();
+        if(date==null)date=nowDate;
 
         model.addAttribute("timecardlist",service.getTimeCardList(date));
+        model.addAttribute("date",date);
+        model.addAttribute("nowDate",nowDate);
+
         model.addAttribute("username",userdetail.getLoginName());
         model.addAttribute("userroll",userdetail.getUserRoll());
 
         return "DailyReportSystem/timecardList";
 
     }
+
+    @PostMapping("/timecardlist")
+    public String postTimecardList(@AuthenticationPrincipal UserDetail userdetail,Model model,@RequestParam(name="Date") String date) {
+        LocalDate localDate=LocalDate.parse(date,DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        getTimecardList(userdetail,model,localDate);
+
+        return "DailyReportSystem/timecardList";
+    }
+
     @GetMapping("/timecardupdate/{id}")
     public String getTimeCardUpdate(@PathVariable("id") Integer id,
                                     @AuthenticationPrincipal UserDetail userdetail,
