@@ -38,13 +38,14 @@ public class ReportController {
     @GetMapping("/reportlist")
     public String getReportList(@AuthenticationPrincipal UserDetail userdetail,Model model) {
 
-        model.addAttribute("reportlist", service.getReportList());
-        model.addAttribute("index", service.getReportList().size());
+        model.addAttribute("reportlist", service.getReportList(1));
+        model.addAttribute("index", service.getReportList(1).size());
 
         model.addAttribute("username",userdetail.getLoginName());
         model.addAttribute("userroll",userdetail.getUserRoll());
 
         model.addAttribute("follow",false);
+        model.addAttribute("disapproval",false);
 
         return "DailyReportSystem/reportList";
 
@@ -67,9 +68,24 @@ public class ReportController {
         model.addAttribute("userid",userdetail.getUserId());
 
         model.addAttribute("follow",true);
+        model.addAttribute("disapproval",false);
 
         return "DailyReportSystem/reportList";
 
+    }
+
+    @GetMapping("/reportlist/disapprovallist")
+    public String getdisApprovalList(@AuthenticationPrincipal UserDetail userdetail,Model model){
+        model.addAttribute("reportlist", service.getReportList(0));
+        model.addAttribute("index", service.getReportList(0).size());
+
+        model.addAttribute("username",userdetail.getLoginName());
+        model.addAttribute("userroll",userdetail.getUserRoll());
+
+        model.addAttribute("follow",false);
+        model.addAttribute("disapproval",true);
+
+        return "DailyReportSystem/reportList";
     }
 
      @GetMapping("/reportdetail/{id}")
@@ -123,6 +139,7 @@ public class ReportController {
         report.setEmployee(employee);
         report.setCreatedAt(now);
         report.setUpdatedAt(now);
+        report.setAuthentication(0);
 
         service.saveReport(report);
 
@@ -173,10 +190,27 @@ public class ReportController {
         report.setReportDate(localDate);
         report.setEmployee(employee);
         report.setUpdatedAt(now);
+        report.setAuthentication(0);
 
         service.saveReport(report);
 
         return "redirect:/report/reportlist";
+
+    }
+
+    @GetMapping("/reportapproval/{id}")
+    public String getReportApproval(@PathVariable("id") Integer id,@AuthenticationPrincipal UserDetail userdetail,Model model) {
+
+        Report report=service.getReport(id);
+        if(report.getAuthentication()==0) {
+        report.setAuthentication(1);
+        }else {
+        report.setAuthentication(0);
+        }
+
+        service.saveReport(report);
+
+        return getReportDetail(id,userdetail,model);
 
     }
 }

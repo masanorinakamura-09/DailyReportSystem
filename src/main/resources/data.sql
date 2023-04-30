@@ -7,7 +7,7 @@ INSERT INTO daily_report_system.employee ( id, created_at, delete_flag, name, up
 
 
 INSERT INTO authentication(code,password,role,employee_id) VALUES ("ktaro","$2a$08$clh9XaYYznpX9WDqySgiCuUu4znpSeu2oJi5l2Q00UJs42Llrbd7S","管理者",1);
-INSERT INTO authentication(code,password,role,employee_id) VALUES ("ttaro","$2a$10$F1k.2HZtkRpoSDymdZCTnuI7eVdoKP.Yb8gtiWmVTKejp53Htlm56","一般",2);
+INSERT INTO authentication(code,password,role,employee_id) VALUES ("ttaro","$2a$10$F1k.2HZtkRpoSDymdZCTnuI7eVdoKP.Yb8gtiWmVTKejp53Htlm56","課長",2);
 INSERT INTO daily_report_system.authentication ( code, password, role, employee_id ) VALUES ('ataro','$2a$10$DsalQIriYr9Cepk6iHtYPedIo.4JRdca5/r4phrTMjlyHMXcRnfOm','一般',3);
 INSERT INTO daily_report_system.authentication ( code, password, role, employee_id ) VALUES ('btaro','$2a$10$5AwEBkqWRaBOfgyUkFG6Cumz8SD7cg6oSiZ.Ov5wjlWYS6faUPmwO','一般',4);
 INSERT INTO daily_report_system.authentication ( code, password, role, employee_id ) VALUES ('ctaro','$2a$10$.10eiiqbIbPo6rrY8wFGVuDrnn9cpAQcgjNFBMIfi2P9LwgRBtj0S','一般',5);
@@ -17,9 +17,9 @@ INSERT INTO timecard (leavingwork_time, timecard_date, work_time, employee_id ) 
 INSERT INTO timecard (leavingwork_time, timecard_date, work_time, employee_id ) VALUES ("21:00",'2021-09-29',"12:00",1);
 INSERT INTO timecard (leavingwork_time, timecard_date, work_time, employee_id ) VALUES ("23:00",'2020-11-11',"07:00",2);
 
-INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id ) VALUES (1,'ktaro','2023-04-17 20:46:26','2023-04-17','ktaro','2023-04-17 20:46:26',1);
-INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id ) VALUES (2,'ttaro','2023-04-17 20:46:45','2023-04-17','ttaro','2023-04-17 20:46:45',2);
-INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id ) VALUES (3,'ataro','2023-04-17 20:47:11','2023-04-17','ataro','2023-04-17 20:47:11',3);
-INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id ) VALUES (4,'btaro','2023-04-17 20:47:31','2023-04-17','btaro','2023-04-17 20:47:31',4);
-INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id ) VALUES (5,'ctaro','2023-04-17 20:47:49','2023-04-17','ctaro','2023-04-17 20:47:49',5);
-INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id ) VALUES (6,'dtaro','2023-04-17 20:48:07','2023-04-17','dtaro','2023-04-17 20:48:07',6);
+INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication ) VALUES (1,'ktaro','2023-04-17 20:46:26','2023-04-17','ktaro','2023-04-17 20:46:26',1,1);
+INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication ) VALUES (2,'ttaro','2023-04-17 20:46:45','2023-04-17','ttaro','2023-04-17 20:46:45',2,1);
+INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication ) VALUES (3,'ataro','2023-04-17 20:47:11','2023-04-17','ataro','2023-04-17 20:47:11',3,1);
+INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication ) VALUES (4,'btaro','2023-04-17 20:47:31','2023-04-17','btaro','2023-04-17 20:47:31',4,1);
+INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication) VALUES (5,'ctaro','2023-04-17 20:47:49','2023-04-17','ctaro','2023-04-17 20:47:49',5,0);
+INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication ) VALUES (6,'dtaro','2023-04-17 20:48:07','2023-04-17','dtaro','2023-04-17 20:48:07',6,1);

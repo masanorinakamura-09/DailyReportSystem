@@ -21,7 +21,7 @@ import lombok.Data;
 public class Authentication {
 
     public static enum Role{
-        一般,管理者
+        一般,管理者,課長
     }
     public static interface Register extends Default{}
     public static interface Update extends Default{}

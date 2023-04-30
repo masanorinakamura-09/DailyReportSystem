@@ -52,4 +52,7 @@ public class Report {
     @Column(nullable=false,columnDefinition="TIMESTAMP")
     private LocalDateTime updatedAt;
 
+    @Column(nullable=false)
+    private Integer authentication;
+
 }

@@ -18,8 +18,8 @@ public class ReportService {
         this.repository = repository;
     }
 
-    public List<Report> getReportList(){
-            return repository.getReportList();
+    public List<Report> getReportList(Integer authentication){
+            return repository.findByAuthentication(authentication);
     }
 
     public List<Report> getEmployeeReportList(Employee employee){

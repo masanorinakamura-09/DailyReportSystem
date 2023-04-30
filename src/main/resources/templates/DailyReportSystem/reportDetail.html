@@ -46,6 +46,13 @@
             <th>更新日時</th>
             <td th:text="${#temporals.format(report.updatedAt,'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
+
+        <tr >
+            <th>承認</th>
+            <td th:text="未承認" th:if="${userroll!='課長' && report.authentication==0}"></td>
+            <td th:text="承認済み" th:if="${userroll!='課長' && report.authentication==1}"></td>
+            <td th:if="${userroll=='課長' && report.authentication==0}"><a th:href="@{/report/reportapproval/{id}/(id=${report.id})}" th:text="承認する"></a></td>
+            <td th:if="${userroll=='課長' && report.authentication==1}" ><a th:href="@{/report/reportapproval/{id}/(id=${report.id})}" th:text="承認を取り消す"></a></td>
     </table>
         <a th:href="@{/follow/saveFollower/{id}/(id=${report.employee.id})}" th:text="フォローする" th:if="${userid} != ${report.employee.id} and ${follow}!=true"></a>
         <a th:href="@{/follow/cancelFollower/{id}/(id=${report.employee.id})}" th:text="フォロー解除する" th:if="${userid} != ${report.employee.id} and ${follow}==true"></a>
