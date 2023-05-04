@@ -55,4 +55,7 @@ public class Report {
     @Column(nullable=false)
     private Integer authentication;
 
+    @Column(nullable=false)
+    private Integer nice;
+
 }

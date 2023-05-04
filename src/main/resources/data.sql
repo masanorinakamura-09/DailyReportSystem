@@ -17,9 +17,9 @@ INSERT INTO timecard (leavingwork_time, timecard_date, work_time, employee_id ) 
 INSERT INTO timecard (leavingwork_time, timecard_date, work_time, employee_id ) VALUES ("21:00",'2021-09-29',"12:00",1);
 INSERT INTO timecard (leavingwork_time, timecard_date, work_time, employee_id ) VALUES ("23:00",'2020-11-11',"07:00",2);
 
-INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication ) VALUES (1,'ktaro','2023-04-17 20:46:26','2023-04-17','ktaro','2023-04-17 20:46:26',1,1);
-INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication ) VALUES (2,'ttaro','2023-04-17 20:46:45','2023-04-17','ttaro','2023-04-17 20:46:45',2,1);
-INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication ) VALUES (3,'ataro','2023-04-17 20:47:11','2023-04-17','ataro','2023-04-17 20:47:11',3,1);
-INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication ) VALUES (4,'btaro','2023-04-17 20:47:31','2023-04-17','btaro','2023-04-17 20:47:31',4,1);
-INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication) VALUES (5,'ctaro','2023-04-17 20:47:49','2023-04-17','ctaro','2023-04-17 20:47:49',5,0);
-INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication ) VALUES (6,'dtaro','2023-04-17 20:48:07','2023-04-17','dtaro','2023-04-17 20:48:07',6,1);
+INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication,nice) VALUES (1,'ktaro','2023-04-17 20:46:26','2023-04-17','ktaro','2023-04-17 20:46:26',1,1,0);
+INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication,nice) VALUES (2,'ttaro','2023-04-17 20:46:45','2023-04-17','ttaro','2023-04-17 20:46:45',2,1,0);
+INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication,nice) VALUES (3,'ataro','2023-04-17 20:47:11','2023-04-17','ataro','2023-04-17 20:47:11',3,0,0);
+INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication,nice) VALUES (4,'btaro','2023-04-17 20:47:31','2023-04-17','btaro','2023-04-17 20:47:31',4,0,0);
+INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication,nice) VALUES (5,'ctaro','2023-04-17 20:47:49','2023-04-17','ctaro','2023-04-17 20:47:49',5,0,0);
+INSERT INTO daily_report_system.report ( id, content, created_at, report_date, title, updated_at, employee_id,authentication,nice) VALUES (6,'dtaro','2023-04-17 20:48:07','2023-04-17','dtaro','2023-04-17 20:48:07',6,0,0);

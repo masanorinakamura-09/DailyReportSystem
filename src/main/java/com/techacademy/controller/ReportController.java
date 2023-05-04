@@ -90,7 +90,8 @@ public class ReportController {
 
      @GetMapping("/reportdetail/{id}")
         public String getReportDetail(@PathVariable("id") Integer id,@AuthenticationPrincipal UserDetail userdetail,Model model) {
-            model.addAttribute("report",service.getReport(id));
+         Report report=service.getReport(id);
+         model.addAttribute("report",service.getReport(id));
 
             model.addAttribute("userid", userdetail.getUserId());
             model.addAttribute("username",userdetail.getLoginName());
@@ -196,6 +197,16 @@ public class ReportController {
 
         return "redirect:/report/reportlist";
 
+    }
+
+    @PostMapping("/reportnice/{id}")
+    public String postReportNice(@PathVariable("id") Integer id,
+            @AuthenticationPrincipal UserDetail userdetail,Model model) {
+        Report report=service.getReport(id);
+        report.setNice(report.getNice()+1);
+        service.saveReport(report);
+
+        return "redirect:/report/reportdetail/"+id;
     }
 
     @GetMapping("/reportapproval/{id}")

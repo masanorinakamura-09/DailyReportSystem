@@ -18,7 +18,8 @@
     </nav>
 </header>
 <body>
-    <h1>日報 一覧</h1>
+    <h1　th:if="${userroll != '課長' || disapproval != true}">日報 一覧</h1>
+    <h1 th:if="${userroll == '課長' && disapproval == true}">未承認日報 一覧</h1>
     <table>
         <tr>
             <th>氏名</th>
