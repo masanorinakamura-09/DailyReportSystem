@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.techacademy.entity.Customer;
 import com.techacademy.entity.Employee;
 import com.techacademy.entity.FollowList;
 import com.techacademy.entity.Report;
+import com.techacademy.service.CustomerService;
 import com.techacademy.service.FollowService;
 import com.techacademy.service.ReportService;
 import com.techacademy.service.UserDetail;
@@ -29,10 +31,12 @@ import com.techacademy.service.UserDetail;
 public class ReportController {
     private final ReportService service;
     private final FollowService followservice;
+    private final CustomerService customerservice;
 
-    public ReportController(ReportService service, FollowService followservice) {
+    public ReportController(ReportService service, FollowService followservice, CustomerService customerservice) {
         this.service = service;
         this.followservice = followservice;
+        this.customerservice = customerservice;
     }
 
     @GetMapping("/reportlist")
@@ -90,7 +94,6 @@ public class ReportController {
 
      @GetMapping("/reportdetail/{id}")
         public String getReportDetail(@PathVariable("id") Integer id,@AuthenticationPrincipal UserDetail userdetail,Model model) {
-         Report report=service.getReport(id);
          model.addAttribute("report",service.getReport(id));
 
             model.addAttribute("userid", userdetail.getUserId());
@@ -114,6 +117,7 @@ public class ReportController {
         model.addAttribute("report",report);
         model.addAttribute("currentdate",date);
 
+        model.addAttribute("customerList",customerservice.getCustomerList());
         model.addAttribute("username",userdetail.getLoginName());
         model.addAttribute("userroll",userdetail.getUserRoll());
 
@@ -122,7 +126,9 @@ public class ReportController {
     }
 
     @PostMapping("/reportregister")
-    public String postReportRegister(@RequestParam(name="content") String content,@RequestParam(name="reportDate") String reportDate,
+    public String postReportRegister(@RequestParam(name="content") String content,
+            @RequestParam(name="reportDate") String reportDate,
+            @RequestParam(name="customer") Customer customer,
             @Validated Report report,BindingResult res,
             @AuthenticationPrincipal UserDetail userdetail,Model model) {
 
@@ -141,6 +147,8 @@ public class ReportController {
         report.setCreatedAt(now);
         report.setUpdatedAt(now);
         report.setAuthentication(0);
+        report.setCustomer(customer);
+        report.setNice(0);
 
         service.saveReport(report);
 
@@ -163,6 +171,7 @@ public class ReportController {
         model.addAttribute("reportdate", date);
         }
 
+        model.addAttribute("customerList",customerservice.getCustomerList());
         model.addAttribute("username",userdetail.getLoginName());
         model.addAttribute("userroll",userdetail.getUserRoll());
 
@@ -171,9 +180,12 @@ public class ReportController {
     }
 
     @PostMapping("/reportupdate/{id}")
-    public String postReportUpdate(@RequestParam(name="content") String content,@RequestParam(name="reportDate") String reportDate,
+    public String postReportUpdate(@RequestParam(name="content") String content,
+            @RequestParam(name="reportDate") String reportDate,
+            @RequestParam(name="customer") Customer customer,
             @Validated Report report,BindingResult res,
             @AuthenticationPrincipal UserDetail userdetail,Model model) {
+
 
         if(res.hasErrors()) {
             model.addAttribute("report", report);
@@ -192,7 +204,7 @@ public class ReportController {
         report.setEmployee(employee);
         report.setUpdatedAt(now);
         report.setAuthentication(0);
-
+        report.setCustomer(customer);
         service.saveReport(report);
 
         return "redirect:/report/reportlist";

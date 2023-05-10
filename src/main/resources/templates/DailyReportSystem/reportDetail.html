@@ -12,6 +12,7 @@
         <li><a th:href="@{/employee/employeelist/}" th:text="従業員管理" th:if="${userroll} == '管理者'"></a></li>
         <li><a th:href="@{/report/reportlist/}" th:text="日報管理"></a></li>
         <li><a th:href="@{/timecard/}" th:text="勤怠管理"></a></li>
+        <li><a th:href="@{/customer/}" th:text="顧客情報"></a></li>
         <li th:text="${username}+' さん'"></li>
         <li><form method="post" th:action="@{/logout}" ><input type="submit" value="ログアウト" class="logout"></form></li>
         </ul>
@@ -25,6 +26,14 @@
             <td th:text="${report.employee.name}"></td>
         </tr>
 
+        <tr>
+            <th>顧客名</th>
+            <td th:text="${report.customer.name}"></td>
+        </tr>
+        <tr>
+            <th>商談状況</th>
+            <td th:text="${report.status}"></td>
+        </tr>
         <tr>
             <th>日付</th>
             <td th:text="${report.reportDate}"></td>
